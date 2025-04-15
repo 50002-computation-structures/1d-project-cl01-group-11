@@ -1,0 +1,542 @@
+module game_cu (
+    input clk,  // clock
+    input rst,  // reset
+    input start,
+    input buttonpress[8],
+    input decrease_timer,
+    input delay,
+    input regfile_rd2[4],
+    
+    output alufn[6],
+    output asel[3],
+    output bsel[3],
+    output wa[4],
+    output ra1[4],
+    output ra2[4],
+    output we[1]
+    
+) 
+{
+    enum States {
+        IDLE,
+        STARTTIMER,
+        RESETSCORE,
+        GEN1,
+        LOADBUTTON1,
+        GEN2,
+        CHECK1,
+        BRANCHCHECK1,
+        LOADBUTTON2,
+        GEN3,
+        CHECK2,
+        BRANCHCHECK2,
+        CHECK3,
+        BRANCHCHECK3,
+        LOADBUTTON3,
+        CHECKTIMER,
+        BRANCHTIMER,
+        CHECKBUTTON,
+        BRANCHCHECKBUTTON,
+        INCREASESCORE,
+        GENNEW,
+        CHECK4,
+        BRANCHCHECK4,
+        CHECK5,
+        BRANCHCHECK5,
+        CHECK6,
+        BRANCHCHECK6,
+        CHECK7,
+        BRANCHCHECK7,
+        CHECK8,
+        BRANCHCHECK8,
+        CHECK9,
+        BRANCHCHECK9,
+        SHIFT1,
+        SHIFT2,
+        LOADNEW,
+        END,
+        DECREASETIMER,
+        UPDATEHIGHSCORE,
+        SETGAMEFLAG0,
+        SETGAMEFLAG1,
+        BUTTON0PRESS,
+        BUTTON1PRESS,
+        BUTTON2PRESS,
+        BUTTON3PRESS,
+        BUTTON4PRESS,
+        BUTTON5PRESS,
+        BUTTON6PRESS,
+        BUTTON7PRESS,
+        CLEAR1,
+        CLEAR2,
+        CLEAR3
+    }
+    
+    dff states[$width(States)](#INIT(States.IDLE), .clk(clk), .rst(rst))
+    
+    //d0 = game flag
+    //d1 = currently pressed button
+    //d2 = first button
+    //d3 = second button
+    //d4 = third button
+    //d5 = increment score count
+    //d6 = temp rng reg
+    //d7 = timer reg
+    //d8 = temp reg for comparison
+    //d9 = high score
+    
+    always {
+        alufn = d0
+        asel = 2b00
+        bsel = 2b00
+        wa =  d0
+        ra1 = d0
+        ra2 = d0
+        we = 0
+        
+        states.d = states.q
+        
+        if (rst) {
+            states.d = States.IDLE
+        }
+        else{
+            case(states.q){
+                
+                States.IDLE:
+                    
+                    if (decrease_timer){
+                        states.d = States.CHECKTIMER
+                    }
+                    else if (buttonpress[0]){
+                        states.d = States.BUTTON0PRESS
+                    }
+                    else if (buttonpress[1]){
+                        states.d = States.BUTTON1PRESS
+                    }
+                    else if (buttonpress[2]){
+                        states.d = States.BUTTON2PRESS
+                    }
+                    else if (buttonpress[3]){
+                        states.d = States.BUTTON3PRESS
+                    }
+                    else if (buttonpress[4]){
+                        states.d = States.BUTTON4PRESS
+                    }
+                    else if (buttonpress[5]){
+                        states.d = States.BUTTON5PRESS
+                    }
+                    else if (buttonpress[6]){
+                        states.d = States.BUTTON6PRESS
+                    }
+                    else if (buttonpress[7]){
+                        states.d = States.BUTTON7PRESS
+                    }
+                
+                
+                //-----------------------------------------------INIT START
+                
+                
+                States.RESETSCORE: //SET SCORE TO 0
+                    alufn = 6b000000 //ADD
+                    asel = 3b011 //0
+                    bsel = 3b011 //0
+                    wa = d5 //Score register
+                    we = 1 //Enable write
+                    states.d = States.SETGAMEFLAG1 
+                
+                States.SETGAMEFLAG1:
+                    alufn = 6b000000//ADD
+                    bsel = 3b011 //0
+                    asel = 3b010 //1
+                    wa = d0 //GAMEFLAG register
+                    we = 1
+                    states.d = States.GEN1                          
+                
+                States.GEN1: //Generate new number and load new button
+                    alufn =6b000000 //Add
+                    asel = 3b011 //0
+                    bsel = 3b010 //connected to RNG
+                    wa = d6  //first button 
+                    we = 1 //enable write
+                    states.d = States.LOADBUTTON1
+                
+                States.LOADBUTTON1:
+                    ra1 = d6 //temp rng reg
+                    alufn = 6b011010 //pass thru
+                    asel = 3b000 //choose register
+                    bsel = 3b011 //0 (ignored)
+                    wa = d2 //first button reg
+                    we = 1 //enable write
+                    if (delay){
+                        states.d = States.GEN2 
+                    }
+                
+                States.GEN2: //Generate second number and store in temp rng reg
+                    alufn = 6b000000 //add
+                    asel = 3b011 //0
+                    bsel = 3b010 //rng generator
+                    wa = d6 //temp rng reg
+                    we = 1 //write enable
+                    states.d = States.CHECK7
+                
+                States.CHECK7: //Check if button generated is same as 1
+                    ra1 = d6 //temp rng reg
+                    ra2 = d2 //first button reg (still holds just pressed first button)
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d2
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK7
+                
+                
+                States.BRANCHCHECK7: //if 1 (same), if 0 (not the same)
+                    ra2 = d8 //temp reg
+                    if(regfile_rd2[0]){ 
+                        states.d = States.GEN2 //if 1 generate again
+                    }
+                    else{
+                        states.d = States.LOADBUTTON2 //if 0 load button
+                        
+                    }
+                
+                States.LOADBUTTON2: //load button from temp rng reg
+                    ra1 = d6 //temp rng reg
+                    alufn = 6b011010 //pass thru
+                    asel = 3b000 //choose register
+                    bsel = 3b011 //0 (ignored)
+                    wa = d3 //second button reg
+                    we = 1 //enable write
+                    if (delay){
+                        states.d = States.GEN3     
+                    }
+                
+                States.GEN3: //Generate third number and store in temp rng reg
+                    alufn = 6b000000 //add
+                    asel = 3b011 //0
+                    bsel = 3b010 //connected to rng
+                    wa = d6 //temp rng reg
+                    we = 1 //enable write
+                    states.d = States.CHECK8
+                
+                States.CHECK8: //compare first button and new button gen
+                    ra1 = d6 //temp rng reg
+                    ra2 = d2 //first button
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d2
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK8
+                
+                States.BRANCHCHECK8: //if 1 (same), if 0 (not the same)
+                    ra2= d8 //temp reg
+                    if(regfile_rd2[0]){
+                        states.d = States.GEN3 //button same so go back to generate
+                    }
+                    else{
+                        states.d = States.CHECK9 //move on to check against second button
+                    }
+                States.CHECK9: //check button against second button to ensure same button not generated
+                    ra1 = d6 //temp rng reg
+                    ra2 = d3 //second button reg
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d3
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK9
+                
+                States.BRANCHCHECK9: //if 1 (same), if 0 (not the same)
+                    ra2 = d8
+                    if(regfile_rd2[0]){
+                        states.d = States.GEN3  //same so gen new
+                    }
+                    else{
+                        states.d = States.LOADBUTTON3
+                    }
+                
+                States.LOADBUTTON3:
+                    ra1 = d6 //temp rng reg now holding correct button
+                    alufn = 6b011010 //pass thru
+                    asel = 3b000 //choose register
+                    bsel = 3b011 //0 (ignored)
+                    wa = d4 //holds third button
+                    we = 1 //enable write
+                    states.d = States.STARTTIMER              
+                
+                
+                States.STARTTIMER: 
+                    alufn = 6b000000 //ADD
+                    asel = 3b001 //timer value
+                    bsel = 3b011
+                    wa = d7 //Timer register
+                    we = 1 //ENABLE WRITE
+                    states.d = States.IDLE
+                //--------------------------------------------------------INIT END
+                //--------------------------------------------------------BUTTONPRESS START
+                States.BUTTON0PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b011 //0
+                    bsel = 3b011 //0
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                
+                States.BUTTON1PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b011 //0
+                    bsel = 3b001 //1
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON2PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b010 //1
+                    bsel = 3b001 //1
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON3PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b100 //3
+                    bsel = 3b011 //0
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON4PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b101 //4
+                    bsel = 3b011 //0
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON5PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b101 //4
+                    bsel = 3b001 //1
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON6PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b100 //3
+                    bsel = 3b100 //3
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                States.BUTTON7PRESS:
+                    alufn = 6b000000 //ADD
+                    asel = 3b100 //3
+                    bsel = 3b101 //4
+                    wa = d1 // button pressed reg
+                    we = 1
+                    states.d = States.CHECKBUTTON
+                
+                //--------------------------------------------------------BUTTONPRESS START
+                //---------------------------------------------------------GAMELOGIC START
+                States.CHECKBUTTON: //check if correct button pressed
+                    alufn = 6b110011 //COMPARE
+                    ra1 = d1 //current button press
+                    ra2 = d2 //correct button
+                    asel = 3b000 //d1
+                    bsel = 2b00 //d2
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    
+                    states.d = States.BRANCHCHECKBUTTON
+                
+                States.BRANCHCHECKBUTTON: //if 1 (same), if 0 (not the same)
+                    ra2 = d8 
+                    if(regfile_rd2[0]){
+                        states.d = States.INCREASESCORE //if same we increase score
+                    }
+                    else{
+                        states.d = States.IDLE //if not we go back to IDLE
+                    }
+                
+                
+                States.INCREASESCORE: //increment score by 1
+                    ra1 = d5 //score reg
+                    alufn = 6b000000 //add
+                    asel = 3b000 //d5
+                    bsel = 3b001 //1
+                    wa = d5 //score reg
+                    we = 1 //write enable
+                    states.d = States.GENNEW
+                
+                States.GENNEW: //generate new button
+                    alufn = 6b000000 //add
+                    asel = 3b011 //0
+                    bsel = 3b010 //rng generator
+                    wa = d6 //temp rng reg
+                    we = 1 //write enable
+                    states.d = States.CHECK4
+                
+                States.CHECK4: //check button against first button to ensure same button not generated
+                    ra1 = d6 //temp rng reg
+                    ra2 = d2 //first button reg (still holds just pressed first button)
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d2
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK4
+                
+                States.BRANCHCHECK4: //if 1 (same), if 0 (not the same)
+                    ra2 = d8 
+                    if(regfile_rd2[0]){
+                        states.d = States.GENNEW //same so gen new
+                    }
+                    else{
+                        states.d = States.CHECK5 //move on to check against second
+                    }
+                States.CHECK5: //check button against second button to ensure same button not generated
+                    ra1 = d6 //temp rng reg
+                    ra2 = d3 //second button reg
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d3
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK5
+                
+                States.BRANCHCHECK5: //if 1 (same), if 0 (not the same)
+                    ra2 = d8
+                    if(regfile_rd2[0]){
+                        states.d = States.GENNEW  //same so gen new
+                    }
+                    else{
+                        states.d = States.CHECK6 //move on to check against third
+                    }
+                States.CHECK6:
+                    ra1 = d6 //temp rng reg
+                    ra2 = d4 //third button reg
+                    alufn = 6b110011 //CMPEQ
+                    asel = 3b000 //d6
+                    bsel = 3b000 //d4
+                    wa = d8 //temp reg
+                    we = 1 //write enable
+                    states.d = States.BRANCHCHECK6
+                
+                States.BRANCHCHECK6: //if 1 (same), if 0 (not the same)
+                    ra2 = d8 
+                    if(regfile_rd2[0]){
+                        states.d = States.GENNEW //same so gen new
+                    }
+                    else{
+                        states.d = States.SHIFT1 //move on to shifting logic
+                    }
+                States.SHIFT1: //copy second to first
+                    alufn = 6b000000 //ADD
+                    ra2 = d3 //second button reg
+                    asel = 3b011 //00
+                    bsel = 3b000 //d3
+                    wa = d2 //first button reg (copy second to first)
+                    we = 1 //write enable
+                    states.d = States.SHIFT2 
+                
+                States.SHIFT2: //copy third to first
+                    alufn = 6b000000 //add
+                    ra2 = d4 //third button reg
+                    asel = 3b011 //00
+                    bsel = 3b000 //d4
+                    wa = d3 //second button reg(copy third to second)
+                    we = 1 //write enable
+                    states.d = States.LOADNEW  
+                
+                States.LOADNEW: //load new button to third button
+                    alufn = 6b000000 //add
+                    ra2 = d6 //temp rng reg
+                    asel = 3b011 //0
+                    bsel = 3b000 //add
+                    wa = d4 //third button reg (copy correctly checked rng reg button to third)
+                    we = 1 //write enable
+                    states.d = States.IDLE
+                
+                //----------------------------------------------GAMELOGIC END
+                //------------------------------------------TIMER START
+                States.CHECKTIMER:
+                    alufn = 6b110011
+                    ra1 = d7
+                    asel = 3b000
+                    bsel = 3b011
+                    wa = d8
+                    we = 1
+                    states.d = States.BRANCHTIMER
+                
+                States.BRANCHTIMER:
+                    ra2 = d8
+                    if(regfile_rd2[0]){
+                        states.d = States.SETGAMEFLAG0
+                    }
+                    else{
+                        states.d = States.DECREASETIMER
+                    }
+                
+                States.DECREASETIMER:
+                    alufn = 6b000001 //subtract
+                    ra1 = d7 //timer reg
+                    asel = 3b000 //reg
+                    bsel = 3b001 //1
+                    wa = d7
+                    we = 1
+                    states.d = States.IDLE
+                //-----------------------------TIMER END
+                
+                //----------------------------------------------END STATE
+                States.SETGAMEFLAG0: //set game flag to 0
+                    alufn = 6b00000 //add
+                    asel =3b011 //0
+                    bsel =3b011 //0
+                    wa = d0 //game flag register
+                    we = 1 //write enable
+                    states.d = States.CLEAR1
+                
+                States.CLEAR1:
+                    alufn = 6b000000
+                    asel = 3b101
+                    bsel = 3b101
+                    wa = d2
+                    we = 1
+                    states.d = States.CLEAR2
+                
+                States.CLEAR2:
+                    alufn = 6b000000
+                    asel = 3b101
+                    bsel = 3b101
+                    wa = d3
+                    we = 1
+                    states.d = States.CLEAR3
+                
+                States.CLEAR3:
+                    alufn = 6b000000
+                    asel = 3b101
+                    bsel = 3b101
+                    wa = d4
+                    we = 1
+                    states.d = States.UPDATEHIGHSCORE
+                
+                
+                States.UPDATEHIGHSCORE:
+                    ra1 = d9
+                    ra2 = d5
+                    alufn = 6b000011
+                    asel = 3b000
+                    bsel = 3b000
+                    wa = d9
+                    we = 1
+                    states.d = States.END
+                
+                
+                States.END:
+                    if(start){
+                        states.d = States.RESETSCORE
+                    }
+                
+            }
+            
+            
+        }
+    }
+}

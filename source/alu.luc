@@ -1,0 +1,75 @@
+module alu (
+    input a[11],
+    input b[11],
+    input alufn[6],
+    output out[11],
+    output z[4],
+    output v[4],
+    output n[4]
+) {
+    const SIZE = 11
+    sig muxout[11] // for the mux with adder, multiplier and divider
+    //implement logic devices
+    adder adder(#SIZE(11))
+    compare compare
+    boolean boolean
+    compact_shifter shifter
+    max max
+    mux_4 mux_4[11]
+    mux_4 mux_2[11]
+    
+    
+    always {
+        //adder
+    adder.a = a;
+    adder.b = b;
+    adder.alufn_signal = alufn;
+
+    z = adder.z;
+    v = adder.v;
+    n = adder.n;
+        //compare
+    compare.z = adder.z
+    compare.v = adder.v
+    compare.n = adder.n
+    compare.alufn = alufn
+        
+        //boolean
+    boolean.a = a
+    boolean.b = b
+    boolean.alufn = alufn
+        
+        //shifter
+    shifter.a = a
+    shifter.b = b[4:0]
+    shifter.alufn = alufn
+        
+        //divider
+        max.a = a
+        max.b = b
+        
+        
+   //mux to choose the first input based on alufn[1:0]
+   repeat(i, 11, 0, 1) {
+            mux_2.in[i][0] = adder.out[i] 
+            mux_2.in[i][1] = adder.out[i] 
+            mux_2.in[i][2] = 0
+            mux_2.in[i][3] = max.max[i]
+            mux_2.s0[i] = alufn[0]
+            mux_2.s1[i] = alufn[1]
+            muxout[i] = mux_2.out[i]      
+        }
+        
+   //mux to choose which logic device to use based on alufn[5:4]
+   repeat(i, 11, 0, 1) {
+            mux_4.in[i][0] = muxout[i] 
+            mux_4.in[i][1] = boolean.bool[i] 
+            mux_4.in[i][2] = shifter.shift[i]
+            mux_4.in[i][3] = compare.cmp[i]
+            mux_4.s0[i] = alufn[4]
+            mux_4.s1[i] = alufn[5]
+            out[i] = mux_4.out[i]   
+        }
+        
+    }
+}

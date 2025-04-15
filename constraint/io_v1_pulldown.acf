@@ -1,0 +1,80 @@
+PINOUT(V1), STANDARD(LVCMOS33) {
+    pin io_led[0][0] B21
+    pin io_led[0][1] B20
+    pin io_led[0][2] B18
+    pin io_led[0][3] B17
+    pin io_led[0][4] B15
+    pin io_led[0][5] B14
+    pin io_led[0][6] B12
+    pin io_led[0][7] B11
+    pin io_led[1][0] B30
+    pin io_led[1][1] C17
+    pin io_led[1][2] B6
+    pin io_led[1][3] B5
+    pin io_led[1][4] B3
+    pin io_led[1][5] B2
+    pin io_led[1][6] C28
+    pin io_led[1][7] C27
+    pin io_led[2][0] C23
+    pin io_led[2][1] C24
+    pin io_led[2][2] C31
+    pin io_led[2][3] C30
+    pin io_led[2][4] C20
+    pin io_led[2][5] C21
+    pin io_led[2][6] C34
+    pin io_led[2][7] C33
+
+    PULL(DOWN) {
+        
+        pin button[0] C46
+        pin button[1] C45
+        pin button[2] C5
+        pin button[3] C6
+        pin button[4] C43
+        pin button[5] C42
+        pin button[6] C8
+        pin button[7] C9
+        pin button[8] C3
+        
+    }
+    
+    pin io_select[0] A48 //ones
+    pin io_select[1] A49 //tens
+    pin io_select[2] A3 //hundreds
+
+    pin score_select[0] A45 //orange
+    pin score_select[1] A46 //Red
+    pin score_select[2] A6 //Brown
+    
+    pin high_select[0] A11
+    pin high_select[1] C48
+    pin high_select[2] A8
+    
+    pin io_segment[0] A36 //A
+    pin io_segment[1] A37 //B
+    pin io_segment[2] A15 //C
+    pin io_segment[3] A14 //D
+    pin io_segment[4] A39 //E
+    pin io_segment[5] A40 //F
+    pin io_segment[6] A12 //G
+    pin io_segment[7] C40 //dp
+    
+    pin io_score[0] A27//A Black
+    pin io_score[1] A28//B White
+    pin io_score[2] A24//C Grey
+    pin io_score[3] A23//D Purple
+    pin io_score[4] A30//E Blue
+    pin io_score[5] A31//F Green
+    pin io_score[6] A21//G Yellow
+    pin io_score[7] C12//dp
+    
+    pin io_high[0] A20 
+    pin io_high[1] A33
+    pin io_high[2] A34
+    pin io_high[3] A18
+    pin io_high[4] A17
+    pin io_high[5] A42
+    pin io_high[6] A43
+    pin io_high[7] A9
+
+}

@@ -1,0 +1,18 @@
+module max (
+    input a[11],
+    input b[11],
+    output max[11]
+) {
+ 
+    always {
+        
+        if (a>b){
+            max = a
+        }
+        else{
+            max = b
+        }
+
+    }
+                
+        }

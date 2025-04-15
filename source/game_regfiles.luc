@@ -1,0 +1,102 @@
+module game_regfiles (
+    input clk,  // clock
+    input rst,  // reset
+    input wa[4], // write address
+    input we, // write enable
+    input data[32], // data in
+    
+    input ra1[4], // read address port 1
+    input ra2[4], // read address port 2
+    output rd1[32], // read data port 1
+    output rd2[32], // read data port 2
+    
+    // states
+    output timer_out[32],
+    output score_out[32],
+    output button1_out[32],
+    output button2_out[32],
+    output button3_out[32],
+    output highscore_out[32],
+    output flag_out[32],
+    output debug[32]
+    
+    
+) {
+    .clk(clk){
+        .rst(rst){
+            dff game_flag[32](#INIT(0))
+            dff timer[32](#INIT(0))
+            dff score[32](#INIT(0))
+            dff curr_button[32](#INIT(0))
+            dff button1[32](#INIT(8))
+            dff button2[32](#INIT(8))
+            dff button3[32](#INIT(8))
+            dff temp[32](#INIT(0))
+            dff highscore[32](#INIT(0))
+            dff rng[32](#INIT(0))
+        }
+    }
+    
+    always {
+       
+        
+        //write port
+        if (we){
+            case(wa){
+                d0 : game_flag.d = data
+                d1 : curr_button.d = data
+                d2 : button1.d = data
+                d3 : button2.d = data
+                d4 : button3.d = data
+                d5 : score.d = data
+                d6 : rng.d = data
+                d7 : timer.d = data
+                d8 : temp.d = data
+                d9 : highscore.d = data
+            }
+        }
+        
+        
+        //read port a
+        case(ra1){
+            d0 : rd1 = game_flag.q
+            d1 : rd1 = curr_button.q
+            d2 : rd1 = button1.q
+            d3 : rd1 = button2.q
+            d4 : rd1 = button3.q
+            d5 : rd1 = score.q
+            d6 : rd1 = rng.q
+            d7 : rd1 = timer.q
+            d8 : rd1 = temp.q
+            d9 : rd1 = highscore.q
+            default : rd1 = 0
+        }
+        
+        //read port b
+        case(ra2){
+            d0 : rd2 = game_flag.q
+            d1 : rd2 = curr_button.q
+            d2 : rd2 = button1.q
+            d3 : rd2 = button2.q
+            d4 : rd2 = button3.q
+            d5 : rd2 = score.q
+            d6 : rd2 = rng.q
+            d7 : rd2 = timer.q
+            d8 : rd2 = temp.q
+            d9 : rd2 = highscore.q
+            default : rd2 = 0
+        }
+        
+        timer_out = timer.q
+        score_out = score.q
+        button1_out = button1.q
+        button2_out = button2.q
+        button3_out = button3.q
+        highscore_out = highscore.q
+        flag_out = game_flag.q
+        debug = highscore.q //debug
+
+ 
+    }
+    
+}

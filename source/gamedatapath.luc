@@ -1,0 +1,122 @@
+module gamedatapath#(
+)(
+    input button[9],
+    input clk,  // clock
+    input rst,  // reset
+    
+    // output to LEDs/7segments
+    output button1[4],
+    output button2[4],
+    output button3[4],
+    output debug[32],
+    output timer_out[32],
+    output score_out[32],
+    output highscore[32],
+    output gameflag[32]
+) {
+    const CLK_FREQ = $is_sim() ? 1000 : 100000000 //const CLK_FREQ = $is_sim() ? 1000 : 10000000 // put 1000 for sim, 10000000 otherwise in hardware
+    const CLOCK = $is_sim() ? 9 : 22 // put 9 for sim, 22 for hardware
+     const DELAY = $is_sim() ? 9 : 26 // put 9 for sim, 26 for hardware
+    
+    //temp variables
+    sig input_alu_a[32]
+    sig input_alu_b[32]
+    alu game_alu
+    
+    
+    .clk(clk){
+        counter game_timer_clock(#SIZE(1),#DIV(CLOCK), .rst(rst))
+        counter init_delay(#SIZE(1),#DIV(DELAY), .rst(rst)) 
+        
+      // edge detector declaration & connection with counters
+      // instantiate 9 edge detectors, 8 for game buttons , 1 for start button 
+      edge_detector button_edge[9](#RISE(9x{{1}}), #FALL(9x{{0}}))
+      // instantiate 9 conditioners, 8 for game buttons , 1 for start button 
+      button_conditioner button_cond[9](#CLK_FREQ(9x{{CLK_FREQ}})) 
+        
+        // game timer & delay
+      edge_detector edge_detector_game_timer(#RISE(1), #FALL(0), .in(game_timer_clock.value))
+      edge_detector edge_detector_init_delay(#RISE(1), #FALL(0), .in(init_delay.value))
+    
+        
+        game_cu game_cu(
+            .rst(rst),
+            .buttonpress(button_edge.out[7:0]),
+            .start(button_edge.out[8]),
+            .decrease_timer(edge_detector_game_timer.out),
+            .delay(edge_detector_init_delay.out)
+            
+        )
+
+        
+        game_regfiles game_regfiles(
+            .we(game_cu.we), 
+            .wa(game_cu.wa), 
+            .ra1(game_cu.ra1), 
+            .ra2(game_cu.ra2),
+            .rst(rst)
+        
+        )
+        
+        pn_gen rng(
+            .rst(rst),
+            .next(1),
+            .seed(32b1011001110001110011100111111001)
+        )
+
+    }
+
+
+    always {
+        
+        button_cond.in = button
+        button_edge.in = button_cond.out
+        game_cu.regfile_rd2 = game_regfiles.rd2
+        
+        // asel mux
+        case(game_cu.asel){
+            b000  : input_alu_a = game_regfiles.rd1
+            b001  : input_alu_a = d600 //timer constant
+            b010  : input_alu_a = b1
+            b011  : input_alu_a = b0
+            b100  : input_alu_a = b11
+            b101  : input_alu_a = b100
+            
+            default : 
+                input_alu_a = 0
+        }
+        
+        // bsel mux
+        case(game_cu.bsel){
+            b000  : input_alu_b = game_regfiles.rd2
+            b001  : input_alu_b = b1
+            b010  : input_alu_b = rng.num
+            b011  : input_alu_b = b0
+            b100  : input_alu_b = b11
+            b101  : input_alu_b = b100
+            b110  : input_alu_b = b10
+            default: //necessary to init
+                input_alu_b = 0
+            
+        }
+        
+        // alu
+        game_alu.a = input_alu_a
+        game_alu.b = input_alu_b
+        game_alu.alufn = game_cu.alufn
+
+        game_regfiles.data = game_alu.out
+
+        score_out = game_regfiles.score_out
+        timer_out = game_regfiles.timer_out
+        highscore = game_regfiles.highscore_out
+        
+        button1 = game_regfiles.button1_out
+        button2 = game_regfiles.button2_out
+        button3 = game_regfiles.button3_out
+        gameflag = game_regfiles.flag_out
+        debug = game_regfiles.debug
+
+        
+    }
+}

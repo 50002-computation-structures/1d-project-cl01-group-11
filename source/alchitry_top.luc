@@ -1,0 +1,83 @@
+module alchitry_top (
+input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    input usb_rx,            // USB->Serial input
+    output usb_tx,           // USB->Serial output
+    output io_led[3][8],     // LEDs on IO Shield
+    output io_segment[8],        // 7-segment LEDs 
+    output io_select[3],        // Digit select on IO Shield
+    output io_score[8],
+    output score_select[3],
+    input button[9],
+    output io_high[8],
+    output high_select[3]
+) {
+    
+    sig rst                 // reset signal
+    const SEVEN_SEG_DIV = $is_sim() ? 3 : 16 // put 3 for sim, 16 for hardware
+    
+    .clk(clk) {
+        reset_conditioner reset_cond
+
+        .rst(rst){
+            gamedatapath gamedatapath
+            multi_seven_seg seg[3](#DIV(3x{{SEVEN_SEG_DIV}}),#DIGITS(3x{{3}}))
+            
+        }
+    }
+    
+    bin_to_dec bin_to_dec_timer(#DIGITS(3),#LEADING_ZEROS(1))
+    bin_to_dec bin_to_dec_highscore(#DIGITS(3),#LEADING_ZEROS(1))
+    bin_to_dec bin_to_dec_score(#DIGITS(3),#LEADING_ZEROS(1))
+    button_decoder button_decoder[3]
+    
+    always {
+        gamedatapath.button = button
+        
+        //convert index of button to which button to light up
+        button_decoder.buttonval[0] = gamedatapath.button1[3:0]
+        button_decoder.buttonval[1] = gamedatapath.button2[3:0]
+        button_decoder.buttonval[2] = gamedatapath.button3[3:0]
+        
+        io_led[2:0] = 3x{{8b11111111}} // turn on all lights when game not runnning
+
+        if(gamedatapath.gameflag){ //gameflag
+        io_led[0] = button_decoder.out[0] | button_decoder.out[1] | button_decoder.out[2] // combine all the buttons to light up
+        io_led[1] = 8b00000000 // turn all other led off
+        }
+        
+        
+        reset_cond.in = ~rst_n  // input raw inverted reset signal
+        rst = reset_cond.out    // conditioned reset
+        usb_tx = usb_rx          // loop serial port
+        
+        //binary to decimal
+        bin_to_dec_timer.value = gamedatapath.timer_out //timer
+        bin_to_dec_highscore.value = gamedatapath.highscore //highscore
+        bin_to_dec_score.value = gamedatapath.score_out //score
+        
+        seg.values[0] = bin_to_dec_timer.digits
+        seg.values[1] = bin_to_dec_score.digits
+        seg.values[2] = bin_to_dec_highscore.digits
+
+        //timer 7seg
+        io_segment = ~seg.seg[0]
+        io_select = seg.sel[0]
+        
+        if(seg.sel[0] == 3b010){
+            io_segment[7] = 0
+        } //light up the dp for timer
+        
+        //score 7 seg
+        io_score = ~seg.seg[1]
+        score_select = seg.sel[1]
+        
+        //highscore 7seg
+        io_high = ~seg.seg[2]
+        high_select = seg.sel[2]
+
+        
+        
+        
+    }
+}

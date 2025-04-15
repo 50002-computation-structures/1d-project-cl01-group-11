@@ -1,0 +1,19 @@
+module button_decoder (
+    input buttonval[4],
+    output out[8]
+) {
+    always { //if button index is 4 light up the 4th button etc
+        case(buttonval){
+            3b000 : out = 8b00000001
+            3b001 : out = 8b00000010
+            3b010 : out = 8b00000100
+            3b011 : out = 8b00001000
+            3b100 : out = 8b00010000
+            3b101 : out = 8b00100000
+            3b110 : out = 8b01000000
+            3b111 : out = 8b10000000
+            
+            default: out = 8b00000000
+        }
+    }
+}

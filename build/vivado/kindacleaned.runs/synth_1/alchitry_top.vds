@@ -1,0 +1,455 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Apr 15 23:48:32 2025
+# Process ID: 15092
+# Current directory: C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.runs/synth_1
+# Command line: vivado.exe -log alchitry_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source alchitry_top.tcl
+# Log file: C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.runs/synth_1/alchitry_top.vds
+# Journal file: C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.runs/synth_1\vivado.jou
+# Running On: yz-koollappy, OS: Windows, CPU Frequency: 2803 MHz, CPU Physical cores: 14, Host memory: 16873 MB
+#-----------------------------------------------------------
+source alchitry_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 463.488 ; gain = 184.695
+Command: synth_design -top alchitry_top -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 24564
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1296.668 ; gain = 439.453
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/alchitry_top.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'multi_seven_seg' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
+	Parameter DIGITS bound to: 2'b11 
+	Parameter DIV bound to: 5'b10000 
+INFO: [Synth 8-6157] synthesizing module 'counter' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+	Parameter SIZE bound to: 2 - type: integer 
+	Parameter DIV bound to: 5'b10000 
+	Parameter TOP bound to: 2'b10 
+	Parameter UP bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'counter' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'seven_seg' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/seven_seg.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/seven_seg.sv:13]
+INFO: [Synth 8-6155] done synthesizing module 'seven_seg' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/seven_seg.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'decoder' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/decoder.sv:7]
+	Parameter WIDTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'decoder' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/decoder.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'multi_seven_seg' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'button_decoder' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/button_decoder.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'button_decoder' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/button_decoder.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'reset_conditioner' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/reset_conditioner.sv:7]
+	Parameter STAGES bound to: 3'b100 
+INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/reset_conditioner.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'gamedatapath' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/gamedatapath.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/edge_detector.sv:7]
+	Parameter RISE bound to: 1'b1 
+	Parameter FALL bound to: 1'b0 
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/edge_detector.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/button_conditioner.sv:7]
+	Parameter CLK_FREQ bound to: 27'b101111101011110000100000000 
+	Parameter MIN_DELAY bound to: 5'b10100 
+	Parameter NUM_SYNC bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'pipeline' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/pipeline.sv:7]
+	Parameter DEPTH bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'pipeline' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/pipeline.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'button_conditioner' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/button_conditioner.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/alu.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'mux_4' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_4.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_4.sv:15]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_4.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'adder' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/adder.sv:7]
+	Parameter SIZE bound to: 4'b1011 
+INFO: [Synth 8-6157] synthesizing module 'rca' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/rca.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'fa' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/fa.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'fa' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/fa.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'rca' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/rca.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'adder' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/adder.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'compare' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/compare.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'compare' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/compare.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'boolean' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/boolean.sv:7]
+	Parameter SIZE bound to: 6'b100000 
+INFO: [Synth 8-6157] synthesizing module 'bool_mux' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bool_mux.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'bool_mux' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bool_mux.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'boolean' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/boolean.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'compact_shifter' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/compact_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'bit_reverse' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bit_reverse.sv:7]
+	Parameter SIZE bound to: 6'b100000 
+INFO: [Synth 8-6155] done synthesizing module 'bit_reverse' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bit_reverse.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_2.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_2.sv:14]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/mux_2.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'shifter' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+	Parameter SHIFT bound to: 5'b00001 
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized0' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+	Parameter SHIFT bound to: 5'b00010 
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized0' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized1' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+	Parameter SHIFT bound to: 5'b00100 
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized1' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized2' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+	Parameter SHIFT bound to: 5'b01000 
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized2' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized3' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+	Parameter SHIFT bound to: 5'b10000 
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized3' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'shifter' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'compact_shifter' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/compact_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'max' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/max.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'max' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/max.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/alu.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'counter__parameterized0' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+	Parameter SIZE bound to: 1'b1 
+	Parameter DIV bound to: 5'b10110 
+	Parameter TOP bound to: 1'b0 
+	Parameter UP bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized0' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'counter__parameterized1' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+	Parameter SIZE bound to: 1'b1 
+	Parameter DIV bound to: 5'b11010 
+	Parameter TOP bound to: 1'b0 
+	Parameter UP bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized1' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'game_cu' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_cu.sv:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_cu.sv:91]
+INFO: [Synth 8-6155] done synthesizing module 'game_cu' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_cu.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'game_regfiles' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_regfiles.sv:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_regfiles.sv:50]
+INFO: [Synth 8-6155] done synthesizing module 'game_regfiles' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/game_regfiles.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'pn_gen' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/pn_gen.sv:7]
+	Parameter SEED bound to: 33'b110010100001100001111010000011000 
+INFO: [Synth 8-6155] done synthesizing module 'pn_gen' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/pn_gen.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'gamedatapath' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/gamedatapath.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'bin_to_dec' [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bin_to_dec.sv:7]
+	Parameter DIGITS bound to: 2'b11 
+	Parameter LEADING_ZEROS bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'bin_to_dec' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/bin_to_dec.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/alchitry_top.sv:7]
+WARNING: [Synth 8-3936] Found unconnected internal register 'muxout_reg' and it is trimmed from '11' to '10' bits. [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.srcs/sources_1/imports/source/alu.sv:164]
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][7] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][6] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][5] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][4] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][3] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][2] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][1] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][0] driven by constant 1
+WARNING: [Synth 8-7129] Port regfile_rd2[3] in module game_cu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_rd2[2] in module game_cu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_rd2[1] in module game_cu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[5] in module compact_shifter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[4] in module compact_shifter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[3] in module compact_shifter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[2] in module compact_shifter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[5] in module boolean is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[4] in module boolean is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[5] in module compare is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[4] in module compare is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[3] in module compare is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn[0] in module compare is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn_signal[5] in module adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn_signal[4] in module adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn_signal[3] in module adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn_signal[2] in module adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alufn_signal[1] in module adder is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1417.316 ; gain = 560.102
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1417.316 ; gain = 560.102
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1417.316 ; gain = 560.102
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1417.316 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/constraint/alchitry.xdc]
+Finished Parsing XDC File [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/constraint/alchitry.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/constraint/alchitry.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/alchitry_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/alchitry_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/constraint/au_props.xdc]
+Finished Parsing XDC File [C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/constraint/au_props.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1515.512 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1515.512 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tftg256-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'D_states_q_reg' in module 'game_cu'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                           000000 |                           000000
+                iSTATE12 |                           000001 |                           001111
+                iSTATE23 |                           000010 |                           010000
+                iSTATE34 |                           000011 |                           100111
+                iSTATE30 |                           000100 |                           110001
+                iSTATE29 |                           000101 |                           110010
+                iSTATE27 |                           000110 |                           110011
+                iSTATE37 |                           000111 |                           100110
+                iSTATE43 |                           001000 |                           100100
+                  iSTATE |                           001001 |                           000010
+                iSTATE41 |                           001010 |                           101000
+                iSTATE44 |                           001011 |                           000011
+                iSTATE28 |                           001100 |                           000100
+                iSTATE25 |                           001101 |                           000101
+                 iSTATE2 |                           001110 |                           011011
+                iSTATE42 |                           001111 |                           011100
+                iSTATE26 |                           010000 |                           001000
+                iSTATE24 |                           010001 |                           001001
+                iSTATE39 |                           010010 |                           011101
+                iSTATE33 |                           010011 |                           011110
+                iSTATE31 |                           010100 |                           011111
+                iSTATE14 |                           010101 |                           100000
+                iSTATE15 |                           010110 |                           001110
+                 iSTATE0 |                           010111 |                           000001
+                iSTATE40 |                           011000 |                           100101
+                iSTATE38 |                           011001 |                           101001
+                iSTATE35 |                           011010 |                           101010
+                iSTATE32 |                           011011 |                           101011
+                iSTATE21 |                           011100 |                           101100
+                iSTATE20 |                           011101 |                           101101
+                iSTATE17 |                           011110 |                           101110
+                iSTATE16 |                           011111 |                           101111
+                iSTATE36 |                           100000 |                           110000
+                iSTATE22 |                           100001 |                           010001
+                iSTATE19 |                           100010 |                           010010
+                iSTATE18 |                           100011 |                           010011
+                iSTATE13 |                           100100 |                           010100
+                iSTATE10 |                           100101 |                           010101
+                 iSTATE7 |                           100110 |                           010110
+                 iSTATE5 |                           100111 |                           010111
+                 iSTATE9 |                           101000 |                           011000
+                 iSTATE8 |                           101001 |                           011001
+                 iSTATE4 |                           101010 |                           011010
+                iSTATE11 |                           101011 |                           100001
+                 iSTATE6 |                           101100 |                           100010
+                 iSTATE3 |                           101101 |                           100011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'D_states_q_reg' using encoding 'sequential' in module 'game_cu'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   10 Bit       Adders := 6     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   4 Input     32 Bit         XORs := 1     
+	   2 Input     11 Bit         XORs := 1     
+	   3 Input      1 Bit         XORs := 11    
+	   2 Input      1 Bit         XORs := 33    
++---Registers : 
+	               32 Bit    Registers := 14    
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 9     
+	                1 Bit    Registers := 11    
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 1     
+	   7 Input   11 Bit        Muxes := 1     
+	   8 Input   11 Bit        Muxes := 1     
+	  10 Input   10 Bit        Muxes := 3     
+	   2 Input   10 Bit        Muxes := 6     
+	   2 Input    8 Bit        Muxes := 5     
+	   8 Input    8 Bit        Muxes := 3     
+	  10 Input    7 Bit        Muxes := 3     
+	  46 Input    6 Bit        Muxes := 1     
+	  63 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   3 Input    4 Bit        Muxes := 3     
+	  46 Input    4 Bit        Muxes := 3     
+	   2 Input    4 Bit        Muxes := 3     
+	  11 Input    4 Bit        Muxes := 3     
+	  12 Input    4 Bit        Muxes := 6     
+	  46 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 2     
+	   4 Input    1 Bit        Muxes := 23    
+	   2 Input    1 Bit        Muxes := 227   
+	   9 Input    1 Bit        Muxes := 1     
+	  46 Input    1 Bit        Muxes := 2     
+	  11 Input    1 Bit        Muxes := 10    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][7] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][6] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][5] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][4] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][3] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][2] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][1] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_led[2][0] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_score[7] driven by constant 1
+WARNING: [Synth 8-3917] design alchitry_top has port io_high[7] driven by constant 1
+WARNING: [Synth 8-7129] Port regfile_rd2[3] in module game_cu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_rd2[2] in module game_cu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port regfile_rd2[1] in module game_cu is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 1515.512 ; gain = 658.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 1546.000 ; gain = 688.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    90|
+|3     |LUT1   |    33|
+|4     |LUT2   |   111|
+|5     |LUT3   |    83|
+|6     |LUT4   |   117|
+|7     |LUT5   |    93|
+|8     |LUT6   |   300|
+|9     |MUXF7  |     1|
+|10    |FDRE   |   500|
+|11    |FDSE   |    34|
+|12    |IBUF   |    12|
+|13    |OBUF   |    58|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 14 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:32 . Memory (MB): peak = 1556.090 ; gain = 600.680
+Synthesis Optimization Complete : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1556.090 ; gain = 698.875
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1558.934 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 91 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1562.586 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: f5056aee
+INFO: [Common 17-83] Releasing license: Synthesis
+92 Infos, 41 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 1562.586 ; gain = 1099.098
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1562.586 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/chiny/Desktop/SUTD/Comp struct/fuckkkk/kindacleaned/build/vivado/kindacleaned.runs/synth_1/alchitry_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 15 23:49:16 2025...
